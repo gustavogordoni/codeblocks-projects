@@ -1,6 +1,6 @@
 # CodeBlocks Projects Helper
 
-Scripts simples para **criar, compilar e executar projetos C++ no estilo do Code::Blocks** diretamente pelo terminal Linux.
+Scripts simples para **criar, compilar e executar projetos C++ no estilo do Code::Blocks** diretamente pelo terminal.
 A ideia é reproduzir a mesma estrutura de pastas e arquivos (`bin/Debug`, `obj/Debug`, `.cbp`, etc.), para que o projeto continue sendo **totalmente compatível com o Code::Blocks**, mas sem precisar abrir a IDE para tarefas básicas.
 
 ---

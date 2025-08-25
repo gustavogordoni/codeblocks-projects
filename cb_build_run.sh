@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Primeiro argumento = tipo de build
+# Tipo de build
 BUILD_TYPE=${1:-Debug}
-# Segundo argumento = diretório (padrão .)
+# Diretório (padrão .)
 PROJECT_DIR=${2:-.}
 
-# Expande para caminho absoluto
 PROJECT_DIR=$(realpath -m "$PROJECT_DIR")
 cd "$PROJECT_DIR" || { echo "Diretório inválido: $PROJECT_DIR"; exit 1; }
 
@@ -19,7 +18,6 @@ mkdir -p "$OBJ_DIR" "bin/$BUILD_TYPE"
 echo "Compilando projeto '$PROJECT_NAME' em $BUILD_TYPE..."
 echo "Diretório: $PROJECT_DIR"
 
-# Flags de compilação
 if [ "$BUILD_TYPE" == "Debug" ]; then
     CXXFLAGS="-Wall -fexceptions -g"
 elif [ "$BUILD_TYPE" == "Release" ]; then
@@ -29,7 +27,6 @@ else
     exit 1
 fi
 
-# Todos os .cpp do diretório raiz (pode expandir p/ recursivo depois)
 CPP_FILES=$(find . -maxdepth 1 -name "*.cpp")
 OBJ_FILES=""
 

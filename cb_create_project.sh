@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Nome do projeto
+PROJECT_NAME=$1
+# Diretório alvo (padrão = .)
+TARGET_DIR=${2:-.}
+
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Uso: $0 <nome_do_projeto> [diretorio]"
+    exit 1
+fi
+
+# Expande ~, ., .. etc para caminho absoluto
+TARGET_DIR=$(realpath -m "$TARGET_DIR")
+PROJECT_DIR="$TARGET_DIR/$PROJECT_NAME"
+
+# Criar estrutura
+mkdir -p "$PROJECT_DIR/bin/Debug" "$PROJECT_DIR/bin/Release"
+mkdir -p "$PROJECT_DIR/obj/Debug" "$PROJECT_DIR/obj/Release"
+
+# Arquivo main.cpp padrão
+cat > "$PROJECT_DIR/main.cpp" << 'EOF'
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}
+EOF
+
+# Arquivo .cbp
+cat > "$PROJECT_DIR/$PROJECT_NAME.cbp" << EOF
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+    <FileVersion major="1" minor="6" />
+    <Project>
+        <Option title="$PROJECT_NAME" />
+        <Option pch_mode="2" />
+        <Option compiler="gcc" />
+        <Build>
+            <Target title="Debug">
+                <Option output="bin/Debug/$PROJECT_NAME" prefix_auto="1" extension_auto="1" />
+                <Option object_output="obj/Debug/" />
+                <Option type="1" />
+                <Option compiler="gcc" />
+                <Compiler>
+                    <Add option="-g" />
+                </Compiler>
+            </Target>
+            <Target title="Release">
+                <Option output="bin/Release/$PROJECT_NAME" prefix_auto="1" extension_auto="1" />
+                <Option object_output="obj/Release/" />
+                <Option type="1" />
+                <Option compiler="gcc" />
+                <Compiler>
+                    <Add option="-O2" />
+                </Compiler>
+                <Linker>
+                    <Add option="-s" />
+                </Linker>
+            </Target>
+        </Build>
+        <Compiler>
+            <Add option="-Wall" />
+            <Add option="-fexceptions" />
+        </Compiler>
+        <Unit filename="main.cpp" />
+        <Extensions />
+    </Project>
+</CodeBlocks_project_file>
+EOF
+
+echo "Projeto '$PROJECT_NAME' criado em: $PROJECT_DIR"
+

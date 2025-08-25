@@ -94,7 +94,7 @@ Para facilitar, edite seu `~/.bashrc` ou `~/.zshrc` e adicione:
 alias cbnew='[diretório-script]/cb_create_project.sh'
 alias cbbuild='[diretório-script]/cb_build_run.sh'
 ```
-Por exemplo, para caso os scripts estejam em ~/Downloads/codeblocks-projects/ faça:
+Por exemplo, para caso os scripts estejam em `~/Downloads/codeblocks-projects/` faça:
 
 ```bash
 alias cbnew='~/Downloads/codeblocks-projects/cb_create_project.sh'
@@ -155,5 +155,3 @@ MeuProjeto/
 ```
 
 Compatível para abrir direto no **Code::Blocks**.
-
----

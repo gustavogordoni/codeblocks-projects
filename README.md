@@ -10,6 +10,7 @@ A ideia é reproduzir a mesma estrutura de pastas e arquivos (`bin/Debug`, `obj/
 * Criar projetos Code::Blocks direto no terminal
 * Compilar e rodar rapidamente sem abrir IDE
 * Manter compatibilidade total com o Code::Blocks
+* Coletar `main.cpp` de múltiplos projetos para submissão
 
 ---
 
@@ -25,7 +26,7 @@ cd codeblocks-projects/
 Dê permissão de execução nos scripts:
 
 ```bash
-chmod +x cb_create_project.sh cb_build_run.sh
+chmod +x cb_create_project.sh cb_build_run.sh cb_copy_main.sh
 ```
 
 ---
@@ -86,6 +87,35 @@ O script gera:
 
 ---
 
+### Coletar todos os `main.cpp` (novo script)
+
+```bash
+./cb_copy_main.sh
+```
+
+* Cria uma pasta `moodle` dentro do diretório atual
+* Procura em todas as subpastas por projetos Code::Blocks (`.cbp`) que contenham `main.cpp`
+* Copia cada `main.cpp` para `moodle`, renomeando para `NomeDoProjeto.cpp`
+
+Exemplo de saída:
+
+```
+Copiando ProjetoA/main.cpp → ./moodle/ProjetoA.cpp
+Copiando ProjetoB/main.cpp → ./moodle/ProjetoB.cpp
+Cópia concluída! Arquivos estão em ./moodle
+```
+
+Estrutura gerada:
+
+```
+moodle/
+ ├── ProjetoA.cpp
+ ├── ProjetoB.cpp
+ └── ProjetoC.cpp
+```
+
+---
+
 ## Alias no shell
 
 Para facilitar, edite seu `~/.bashrc` ou `~/.zshrc` e adicione:
@@ -93,12 +123,14 @@ Para facilitar, edite seu `~/.bashrc` ou `~/.zshrc` e adicione:
 ```bash
 alias cbnew='[diretório-script]/cb_create_project.sh'
 alias cbbuild='[diretório-script]/cb_build_run.sh'
+alias cbcollect='[diretório-script]/cb_copy_main.sh'
 ```
 Por exemplo, para caso os scripts estejam em `~/Downloads/codeblocks-projects/` faça:
 
 ```bash
 alias cbnew='~/Downloads/codeblocks-projects/cb_create_project.sh'
 alias cbbuild='~/Downloads/codeblocks-projects/cb_build_run.sh'
+alias cbcopy='~/Downloads/codeblocks-projects/cb_copy_main.sh'
 ```
 
 ### Como usar com alias
@@ -118,6 +150,9 @@ cbbuild Release
 
 # compila projeto em um diretório específico
 cbbuild Debug ~/Projetos/MeuApp
+
+# coleta main.cpp para pasta moodle
+cbcopy
 ```
 
 ---

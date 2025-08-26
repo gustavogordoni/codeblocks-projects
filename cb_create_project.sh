@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Nome do projeto
+# Pojeto
 PROJECT_NAME=$1
-# Diretório alvo (padrão = .)
+# Diretório alvo
 TARGET_DIR=${2:-.}
 
 if [ -z "$PROJECT_NAME" ]; then
@@ -10,15 +10,12 @@ if [ -z "$PROJECT_NAME" ]; then
     exit 1
 fi
 
-# Expande ~, ., .. etc para caminho absoluto
 TARGET_DIR=$(realpath -m "$TARGET_DIR")
 PROJECT_DIR="$TARGET_DIR/$PROJECT_NAME"
 
-# Criar estrutura
 mkdir -p "$PROJECT_DIR/bin/Debug" "$PROJECT_DIR/bin/Release"
 mkdir -p "$PROJECT_DIR/obj/Debug" "$PROJECT_DIR/obj/Release"
 
-# Arquivo main.cpp padrão
 cat > "$PROJECT_DIR/main.cpp" << 'EOF'
 #include <iostream>
 using namespace std;
@@ -29,7 +26,6 @@ int main() {
 }
 EOF
 
-# Arquivo .cbp
 cat > "$PROJECT_DIR/$PROJECT_NAME.cbp" << EOF
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
@@ -72,4 +68,3 @@ cat > "$PROJECT_DIR/$PROJECT_NAME.cbp" << EOF
 EOF
 
 echo "Projeto '$PROJECT_NAME' criado em: $PROJECT_DIR"
-

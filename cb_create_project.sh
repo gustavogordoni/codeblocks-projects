@@ -67,4 +67,8 @@ cat > "$PROJECT_DIR/$PROJECT_NAME.cbp" << EOF
 </CodeBlocks_project_file>
 EOF
 
+<<<<<<< HEAD
 echo "Projeto '$PROJECT_NAME' criado em: $PROJECT_DIR"
+=======
+echo "Projeto '$PROJECT_NAME' criado em: $PROJECT_DIR"
+>>>>>>> cc0402ac6c0ad7f5ba9ad8945b10b9dc8d83b097
